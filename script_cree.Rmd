@@ -1,0 +1,226 @@
+---
+title: "Tutoriel Data Analysis"
+author: "Marie VA/G/OYEAU"
+date: "07/06/2023"
+output:   
+  pdf_document:
+    toc: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+  
+# Fonctionnement de R  
+`R` est un langage open-source de programmation orienté objet, développé par et pour les statisticien.ne.s.  
+Il fonctionne grâce à des fonctions (toujours suivis de parenthèses dans ce support comme `plot()`) paramétrables grâce à des arguments. Les fonctions sont réunis dans des packages (ici écrit entre `{}`, *par exemple* `{tidyverse}`).  
+Certains packages sont téléchargés de base dans `R`, les autres sont à installer depuis le [`CRAN`](https://cran.r-project.org/) ou depuis d'autres sources.  
+Pour pouvoir utiliser les fonctions contenues dans un package il faut le charger dans l'environnement en utilisant `library(nom_du_package)`.  
+  
+# RStudio  
+Pour bien travailler avec R, il est indispensable d'utiliser RStudio comme IDE.  
+Pour installer RStudio, il faut commencer par [installer R](https://cran.r-project.org/), puis [RStudio](https://posit.co/download/rstudio-desktop/).  
+    
+Le `cheatsheet` de [RStudio en tant qu'IDE](doc/rstudio-ide.pdf) est téléchargeable via [les ressources de posit](https://posit.co/resources/cheatsheets/) ou disponible dans ce projet dans le répertoire `doc`.  
+  
+**Attention** : Pour toutes les personnes travaillant sous **Windows**, il faut aussi installer `Rtools`.  
+  
+```{r installation_r_tools, eval=FALSE}
+
+install.packages("utils")
+install.packages("installr")
+installr::install.Rtools()
+
+```
+  
+# RMarkdown  
+La syntaxe et la structure des rapports générés avec `Rmarkdown` permettent de faciliter la **maintenance** et la **mise à jour** des codes réalisés. En effet, `Rmarkdown` est conçu pour permettre l'**automatisation** et la **réutilisation de code**. Un bon développement fait gagner du temps par la suite.  
+  
+Le `Rmarkdown` est un type de fichier qui permet d'organiser le code (R mais aussi Python, SQL...) **sous forme de blocs** avec du **texte** et des **sorties** (graphiques, tableaux...).  
+Il est aussi possible d'intégrer des images, des liens vers des fichiers extérieurs ou des pages web.  
+  
+![*Exemple d'image intégrée*](https://media.licdn.com/dms/image/C4E0BAQHaWE0bONSQVA/company-logo_200_200/0/1673264880269?e=1693440000&v=beta&t=8YcVsfxc60xD6Oy2akaUd6OtTkmTeZqdOjuLrAC6a7g)  
+Le [`cheatsheet` de `Rmarkdown`](doc/rmarkdown.pdf) est téléchargeable via [les ressources de RStudio](https://rmarkdown.rstudio.com/lesson-15.html) ou disponible dans ce projet dans le répertoire `doc`.  
+
+## Syntaxe en `Rmarkdown`  
+Le fichier rédigé en `Rmarkdown` est différent de la sortie finale (`.docx`, `.html`, `.pdf`...) qui est "tricotée" (`knit` en anglais). Il faut donc utiliser un codage spécifique pour mettre en forme le texte.  
+  
+Les titres sont caractérisés par des `#` en fonction du niveau : `#Titre de niveau 1`, `##Titre de niveau 2`...  
+    
+La mise en forme du texte se fait avec les étoiles ou les `` :  
+  
+* Une étoile `*` avant et après la partie à valoriser permet de mettre en *italique* (codé `*italique*`)  
+* Deux `**` avant et après mettent en **gras** (codé `**gras**`)    
+* Un **double espace** `  ` permet de passer à la ligne. Il faut donc toujours mettre deux espaces à la fin de chaque ligne. Sans ces espaces, toutes les lignes sont collées les unes à la suite des autres.    
+* Pour éditer un `format code` (sans qu'il se lance) pour présenter les packages, les fonctions ou les objets utilisés (comme fait dans ce document), il faut encadrer d'impostrophes  
+  
+Le format `Rmarkdown` fait la part belle au texte alors que le code doit être spécifié. 
+Le code apparaît soit dans des `chunks` (morceaux en anglais) qui commencent et terminent avec 3 signes accents graves (ou impostrophe) qu'on peut générer avec `Ctrl+ Alt + I`, soit mis dans le texte sur une ligne entouré d'impostrophes.  
+Dans les deux cas, il faut toujours écrire au début le langage utilisé (donc r).    
+*Par exemple* : La largeur moyenne des sépales du jeu de données iris est `r round(mean(iris$Sepal.Length), digits = 2)`.  
+  
+# Analyse descriptive  
+Utilisation du jeu de données `penguins` du package `{palmerpenguins}` qui recense les caractéristiques des pingouins de l'archipel de Palmer. Plus d'informations sur ce jeu de données dans la page d'aide `help(penguins)`.  
+
+## visualisation rapide des données  
+Avec la fonction très généraliste `plot()` chargée de base dans l’environnement.  
+```{r visualiser_les_donnnes}
+
+
+
+```
+
+```{r resume_des_donnees}
+
+
+
+```
+
+```{r visualiser_les_donnnees_manquantes}
+
+
+
+```
+
+```{r visualiser_le_tableau_de_donnees}
+
+
+
+```
+
+  
+## Analyse univariée  
+### Variable qualitative  
+Il y a trois variables qualitatives ici :  `species`, `island` et `sex`.  
+Toutes les trois sont finis -> dnc on peut réaliser directement des tableaux de contingence.  
+```{r tableau_de_contingenance}
+
+
+```
+  
+Représentation graphique  
+```{r representation_graphique}
+
+
+```
+  
+### Variable quantitative  
+Il y a 5 variables quantitatives, il est possible d'étudier leurs dispersion grâce aux histogrammes ou de calculer les mesures de cette dispersion.  
+```{r histogramme}
+
+
+```
+
+Calcul des mesures de dispersion  
+```{r mesures_dispersion}
+
+
+
+```
+
+Réalisation d'un graphique généralisant ces données : la boîte à moustaches
+```{r boite_a_moustaches}
+
+```
+  
+## Analyse bivariée  
+### Deux variables quantitatives  
+Il faut **toujours commencer** par la représentation graphique !  
+```{r nuage_de_points}
+
+
+```
+
+Réalisation d'une régression linéaire  
+```{r regression_lineaire}
+
+```
+  
+### Deux variables qualitatives  
+Réalisation de tableau de contingence  
+```{r tableau_contingeance_bi}
+
+
+```
+
+Représentation par une carte des points chauds  
+```{r carte_point_chaud}
+
+
+
+```
+  
+### Une variable qualitative et une quantitative  
+Revient à chercher si au moins un des groupes est différent.  
+La représentation graphique se fait comme précédemment en ajoutant de la couleur.  
+```{r boite_a_moustaches_colore}
+
+
+```
+  
+Pour l'analyse, possibilité de réaliser une ANOVA pour déterminer les différences entre groupes.  
+```{r anova}
+
+
+```
+  
+# Et les données manquantes ?  
+```{r}
+# diagramme de Venn
+library(VennDiagram)
+
+venn.diagram(
+  x = list(
+    penguins |> filter(island == "Biscoe")%>% dplyr::select(species) %>% unlist(),
+    penguins |> filter(island == "Dream")%>% dplyr::select(species) %>% unlist(),
+    penguins |> filter(island == "Torgersen")%>% dplyr::select(species) %>% unlist()
+  ),
+  category.names = penguins$island |> levels(),
+  filename = "diagramme_venn.png",
+  output = TRUE,
+  imagetype="png"
+)
+
+```
+
+  
+# Le `{tidyverse}`  
+Le `{tidyverse}` s'appelait encore le `hadleyverse` il y a quelques année,  c'est-à-dire `l'univers de Hadley` pour [Hadley Wickham](https://hadley.nz/) son génial créateur.  
+Le but de Hadley est de rendre l'analyse données plus facile, plus rapide et surtout **plus fun** et je trouve que cela transparaît dans ses packages !  
+Le `{tidyverse}` c'est l'ensemble des packages open-source développé par Hadley et son équipe (Hadley travaille maintenant pour RStudio en plus de plusieurs universités) qui partagent la même philosophie, la même structure de données (le fameux format `tidy`) et la même syntaxe.  
+  
+Les packages concernés :  
+
+_ [`ggplot2`](https://ggplot2.tidyverse.org/) : Visulisation des données  
+_ [`dplyr`](https://dplyr.tidyverse.org/) : Manipulation des données (filtrer, trier,...) à ne pas confondre avec `tidyr` qui manipule le format du jeu de données. Présenté [le 7 février sur twitch](https://www.twitch.tv/videos/1730949759).   
+_ [`tidyr`](https://tidyr.tidyverse.org/) : Modification du format du jeu de données pour en faire un jeu de donnée `tidy`. Présenté [le 7 février sur twitch](https://www.twitch.tv/videos/1730949759).    
+_ [`readr`](https://readr.tidyverse.org/) : Lecture rapide de fichiers de données format `csv` et autres. **Attention** : format `xslx` non pris en charge, il faut utiliser le package [`readxl`](https://readxl.tidyverse.org/) qui fait partie du `tidyverse` au sens large mais qui n'est pas attaché par défaut quand on fait `library(tidyverse)`   
+_ [`purrr`](https://purrr.tidyverse.org/) : Permet le remplacement d'un grand nombre de boucles. Présenté [le 2 mai sur twitch](https://www.twitch.tv/videos/1809466535).    
+_ [`tibble`](https://tibble.tidyverse.org/) : Format des données `tidy`  
+_ [`stringr`](https://stringr.tidyverse.org/) : Manipulation des chaînes de caractères. Présenté [le 21 mars sur twitch](https://www.twitch.tv/videos/1774056539).     
+_ [`forcats`](https://forcats.tidyverse.org/) : Manipulation des variables facteurs `factors`. Présenté [le 21 mars sur twitch](https://www.twitch.tv/videos/1774056539).     
+_ [`lubrdate`](https://lubridate.tidyverse.org/) : Manipulation des dates. *Nouveau dans le `{tidyverse}`*  
+  
+  
+  
+  
+  
+# En savoir un peu plus sur moi  
+Bonjour,
+Je suis Marie Vaugoyeau et je suis disponible pour des **missions en freelance** d’**accompagnement à la formation** à R et à l’analyse de données et/ou en **programmation** (reprise de scripts, bonnes pratiques de codage, développement de package).  
+Ayant un **bagage recherche en écologie**, j’ai accompagné plusieurs chercheuses en biologie dans leurs analyses de données mais je suis ouverte à d’autres domaines.  
+Vous pouvez retrouver mes offres [ici](https://marievaugoyeau.notion.site/MStats-Marie-Vaugoyeau-d69b566c83414152ac85eae012c970fb).  
+  
+**En plus de mes missions de consulting je diffuse mes savoirs en R et analyse de données sur plusieurs plateformes :**   
+
+- J’ai écrit [un **livre** aux éditions ENI](https://www.editions-eni.fr/livre/langage-r-et-statistiques-initiation-a-l-analyse-de-donnees-9782409036934)  
+- Tous les mois je fais [un **live sur Twitch**](https://www.twitch.tv/marievaugoyeau/videos) pour parler d’un package de R, d’une analyse  
+- Je rédige une **newsletter** de manière irrégulière pour parler de mes **inspirations** et transmettre **des trucs et astuces sur R**. Pour s’y inscrire, [c’est par là](https://d1154691.sibforms.com/serve/MUIEAGj4fIubg6D4qHb7BoZSxNhzkV4p2L0I7GHpNopbqPeDS1J0SpOgaTDCavroygrDTCukB0La-8s1nsQw5wCANT5UP64en1GudsGbKhGVlwbvP_bJdAJ0ECF9BOZ1swRKEnKlnWzTHpLjknJvrCXiH_xw4F_go_2kVB0dWWrkJzRoE22BXImtgVOu29gBxx2hjFkINdeW7Cae?). J’ai aussi [un **blog**](https://mvaugoyeau.netlify.app/fr/), en PLS en ce moment, qu’il faut que je reprenne.  
+  
+Pour en savoir encore un peu plus sur moi, il y a [LinkedIn](https://www.linkedin.com/in/marie-vaugoyeau-72ab64153/) et pour retrouver [tous ces liens et plus encore, c'est ici](https://linktr.ee/mstats)  
+  
+**N’hésitez pas à me contacter sur [marie.vaugoyeau@gmail.com](mailto:marie.vaugoyeau@gmail.com) !**  
+  
+Bonne journée   
+
+Marie  
