@@ -166,20 +166,8 @@ Pour l'analyse, possibilité de réaliser une ANOVA pour déterminer les différ
   
 # Et les données manquantes ?  
 ```{r}
-# diagramme de Venn
-library(VennDiagram)
 
-venn.diagram(
-  x = list(
-    penguins |> filter(island == "Biscoe")%>% dplyr::select(species) %>% unlist(),
-    penguins |> filter(island == "Dream")%>% dplyr::select(species) %>% unlist(),
-    penguins |> filter(island == "Torgersen")%>% dplyr::select(species) %>% unlist()
-  ),
-  category.names = penguins$island |> levels(),
-  filename = "diagramme_venn.png",
-  output = TRUE,
-  imagetype="png"
-)
+
 
 ```
 
