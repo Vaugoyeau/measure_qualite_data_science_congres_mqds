@@ -3,15 +3,16 @@ title: "ATELIER DATA ANALYSIS / Congrès MQDS"
 author: "Marie VAUGOYEAU"
 date: "07/06/2023"
 output:
+  pdf_document: 
+    toc: yes
   html_document:
     toc_float: yes
     toc: yes
     code_folding: show
     number_sections: yes
     theme: lumen
-  pdf_document: 
-    toc: yes
 ---
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licence Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />Ce support est mise à disposition selon les termes de la <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licence Creative Commons Attribution 4.0 International</a>.
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
@@ -122,20 +123,9 @@ write.xlsx(
 
 ```
   
-#### Web-scrapping  
-Il est possible de récupérer facilement des données sur une page internet grâce au package `{rvest}`.  
-*Par exemple* : Importer le titre des lettres de la contesse de Ségur à partir de [Wikisource](https://fr.m.wikisource.org/wiki/Lettres_de_la_comtesse_de_S%C3%A9gur/Texte_entier) grâce aux fonctions du package `{rvest}`.  
-```{r lecture_donnees_site_internet}
-
-library(rvest)
-(page <- read_html("https://fr.m.wikisource.org/wiki/Lettres_de_la_comtesse_de_S%C3%A9gur/Texte_entier") %>% 
-  html_nodes("h1") %>% 
-  html_text())
-
-```
   
-### Import d'un fichier  
-#### Lecture d'un `.csv`
+### Chargement de données dans l'environnement    
+#### Lecture d'un `.csv`  
 Import du fichier `.csv` créé grâce à la fonction `read.csv()` du package `{utils}`.  
 Le nom des lignes est stocké par défaut dans la première colonne `X`.  
 ```{r lecture_csv}
@@ -154,6 +144,18 @@ Import du fichier `.xlsx` à partir du jeu de données `women` grâce à la fonc
 jdd_femme <- read.xlsx(
   "data/jdd_femme.xlsx"
 )
+
+```
+  
+#### Web-scrapping  
+Il est possible de récupérer facilement des données sur une page internet grâce au package `{rvest}`.  
+*Par exemple* : Importer le titre des lettres de la contesse de Ségur à partir de [Wikisource](https://fr.m.wikisource.org/wiki/Lettres_de_la_comtesse_de_S%C3%A9gur/Texte_entier) grâce aux fonctions du package `{rvest}`.  
+```{r lecture_donnees_site_internet}
+
+library(rvest)
+(page <- read_html("https://fr.m.wikisource.org/wiki/Lettres_de_la_comtesse_de_S%C3%A9gur/Texte_entier") %>% 
+  html_nodes("h1") %>% 
+  html_text())
 
 ```
   
