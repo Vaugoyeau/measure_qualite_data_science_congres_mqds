@@ -3,14 +3,14 @@ title: "ATELIER DATA ANALYSIS / Congrès MQDS"
 author: "Marie VAUGOYEAU"
 date: "07/06/2023"
 output:
-  pdf_document:
-    toc: yes
   html_document:
     toc_float: yes
     toc: yes
     code_folding: show
     number_sections: yes
     theme: united
+  pdf_document:
+    toc: yes
 ---
 
 ```{r setup, include=FALSE}
@@ -28,7 +28,7 @@ Pour pouvoir utiliser les fonctions contenues dans un package il faut le charger
 Pour bien travailler avec R, il est indispensable d'utiliser RStudio comme IDE.  
 Pour installer RStudio, il faut commencer par [installer R](https://cran.r-project.org/), puis [RStudio](https://posit.co/download/rstudio-desktop/).  
     
-Le `cheatsheet` de [RStudio en tant qu'IDE](doc/rstudio-ide.pdf) est téléchargeable via [les ressources de posit](https://posit.co/resources/cheatsheets/) ou disponible dans ce projet dans le répertoire `doc`.  
+Le `cheatsheet` de RStudio en tant qu'IDE est téléchargeable via [les ressources de posit](https://posit.co/resources/cheatsheets/).  
   
 **Attention** : Pour toutes les personnes travaillant sous **Windows**, il faut aussi installer `Rtools`.  
   
@@ -48,7 +48,7 @@ Le `Rmarkdown` est un type de fichier qui permet d'organiser le code (R mais aus
 Il est aussi possible d'intégrer des images, des liens vers des fichiers extérieurs ou des pages web : `![](adresse_image)` ou `[texte_a_afficher](adresse_page_web)`.  
   
 ![](https://media.licdn.com/dms/image/C4E0BAQHaWE0bONSQVA/company-logo_200_200/0/1673264880269?e=1693440000&v=beta&t=8YcVsfxc60xD6Oy2akaUd6OtTkmTeZqdOjuLrAC6a7g)  
-Le [`cheatsheet` de `Rmarkdown`](doc/rmarkdown.pdf) est téléchargeable via [les ressources de RStudio](https://rmarkdown.rstudio.com/lesson-15.html) ou disponible dans ce projet dans le répertoire `doc`.  
+Le `cheatsheet` de `Rmarkdown` est téléchargeable via [les ressources de RStudio](https://rmarkdown.rstudio.com/lesson-15.html).  
 
 ### Syntaxe en `Rmarkdown`  
 Le fichier rédigé en `Rmarkdown` est différent de la sortie finale (`.docx`, `.html`, `.pdf`...) qui est "tricotée" (`knit` en anglais). Il faut donc utiliser un codage spécifique pour mettre en forme le texte.  
@@ -169,7 +169,7 @@ library(palmerpenguins)
 
 penguins
 
-View(penguins)
+# View(penguins)
 
 plot(penguins)
 
@@ -468,7 +468,7 @@ venn.diagram(
 )
 
 ```
-![Diagramme de Venn](img/diagramme_venn.png)  
+![Diagramme de Venn](img/diagramme_venn.png)   
 Le diagramme de Venn montre qu'une seule espèce est présente sur les trois îles, les deux autres espèces sont chacune présente sur une seule île.  
 **Attention** : Impossible de faire une effet croisé de l'île et de l'espèce !  
   
