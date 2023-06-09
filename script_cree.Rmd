@@ -453,14 +453,14 @@ penguins |>
 ```{r diagramme_venn, eval=FALSE}
 # diagramme de Venn
 library(VennDiagram)
-
 venn.diagram(
-  x = list(
-    
-    c(glue::glue("Adelie_{1:44}"), glue::glue("Gentoo_{1:124}")),
-    c(glue::glue("Adelie_{1:56}"), glue::glue("Chinstrap_{1:68}")),
-    c(glue::glue("Adelie_{1:52}"))
-  ),
+  x = map(
+      .x = penguins$island |> levels(),
+      .f = ~ penguins |> 
+        filter(island == .x) |> 
+        select(species) |> 
+        unlist()
+    ),
   category.names = penguins$island |> levels(),
   filename = "img/diagramme_venn.png",
   output = TRUE,
@@ -469,7 +469,9 @@ venn.diagram(
 
 ```
 ![Diagramme de Venn](img/diagramme_venn.png)  
-
+Le diagramme de Venn montre qu'une seule espèce est présente sur les trois îles, les deux autres espèces sont chacune présente sur une seule île.  
+**Attention** : Impossible de faire une effet croisé de l'île et de l'espèce !  
+  
 ### Une variable qualitative et une quantitative  
 Revient à chercher si au moins un des groupes est différent.  
 La représentation graphique se fait comme précédemment en ajoutant de la couleur.  
