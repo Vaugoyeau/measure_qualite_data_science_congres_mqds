@@ -8,13 +8,14 @@ output:
     toc: yes
     code_folding: show
     number_sections: yes
-    theme: united
-  pdf_document:
+    theme: lumen
+  pdf_document: 
     toc: yes
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+options(tinytex.verbose = TRUE)
 ```
 
 # Introduction à R 
@@ -47,7 +48,6 @@ La syntaxe et la structure des rapports générés avec `Rmarkdown` permettent d
 Le `Rmarkdown` est un type de fichier qui permet d'organiser le code (R mais aussi Python, SQL...) **sous forme de blocs** avec du **texte** et des **sorties** (graphiques, tableaux...).  
 Il est aussi possible d'intégrer des images, des liens vers des fichiers extérieurs ou des pages web : `![](adresse_image)` ou `[texte_a_afficher](adresse_page_web)`.  
   
-![](https://media.licdn.com/dms/image/C4E0BAQHaWE0bONSQVA/company-logo_200_200/0/1673264880269?e=1693440000&v=beta&t=8YcVsfxc60xD6Oy2akaUd6OtTkmTeZqdOjuLrAC6a7g)  
 Le `cheatsheet` de `Rmarkdown` est téléchargeable via [les ressources de RStudio](https://rmarkdown.rstudio.com/lesson-15.html).  
 
 ### Syntaxe en `Rmarkdown`  
@@ -169,7 +169,7 @@ library(palmerpenguins)
 
 penguins
 
-# View(penguins)
+View(penguins)
 
 plot(penguins)
 
@@ -190,7 +190,7 @@ naniar::gg_miss_upset(penguins)
 
 ```
   
-Pour visualiser différement le tableau de données, il est possible d'utiliser la fonction `glimpse()` du `{tidyverse}`. Plus d'information sur le `{tidyverse}` dans l'onglet [Le `{tidyverse}`](#Le-`{tidyverse}`).  
+Pour visualiser différement le tableau de données, il est possible d'utiliser la fonction `glimpse()` du `{tidyverse}`. Plus d'information sur le `{tidyverse}` dans le paragraphe ci-dessus [Le `{tidyverse}`](#le-tidyverse).  
 ```{r visualiser_le_tableau_de_donnees}
 
 library(tidyverse)
@@ -468,6 +468,7 @@ venn.diagram(
 )
 
 ```
+  
 ![Diagramme de Venn](img/diagramme_venn.png)   
 Le diagramme de Venn montre qu'une seule espèce est présente sur les trois îles, les deux autres espèces sont chacune présente sur une seule île.  
 **Attention** : Impossible de faire une effet croisé de l'île et de l'espèce !  
@@ -595,4 +596,5 @@ Pour en savoir encore un peu plus sur moi, il y a [LinkedIn](https://www.linkedi
 Bonne journée   
 
 Marie  
-![](https://marievaugoyeau.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F776bf262-88b1-411e-9b96-c9e17225fa90%2FbandeauNotion.png?table=block&id=d69b566c-8341-4152-ac85-eae012c970fb&spaceId=99f23b20-d2e7-47f3-bed1-0a3e9cfa7597&width=2000&userId=&cache=v2)
+  
+![](img/bandeauNotion.png)  
